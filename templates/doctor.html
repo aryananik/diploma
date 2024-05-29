@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Добро пожаловать!</h1>
+
+    <h2>Пациенты:</h2>
+    <ul class="list-group">
+        {% for patient in patients %}
+        <li class="list-group-item">
+            <strong>{{ patient.name }}</strong><br>
+            <a href="/patient/{{ patient.name }}" class="btn btn-link">Просмотр карточки</a>
+            <form action="/add_appointment/{{ patient.name }}" method="post" class="form-inline mt-2">
+                <div class="form-group">
+                    <label for="appointment">Новое назначение:</label>
+                    <input type="text" id="appointment" name="appointment" class="form-control ml-2" required>
+                </div>
+                <button type="submit" class="btn btn-primary ml-2">Добавить</button>
+            </form>
+            <form action="/add_test_result/{{ patient.name }}" method="post" class="form-inline mt-2">
+                <div class="form-group">
+                    <label for="test_result">Новый результат анализа:</label>
+                    <input type="text" id="test_result" name="test_result" class="form-control ml-2" required>
+                </div>
+                <button type="submit" class="btn btn-primary ml-2">Добавить</button>
+            </form>
+            <form action="/add_operation/{{ patient.name }}" method="post" class="form-inline mt-2">
+                <div class="form-group">
+                    <label for="operation">Новая операция:</label>
+                    <input type="text" id="operation" name="operation" class="form-control ml-2" required>
+                </div>
+                <button type="submit" class="btn btn-primary ml-2">Добавить</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Добавить нового пациента</h2>
+    <form action="{{ url_for('add_patient') }}" method="post" class="form-group">
+        <label for="name">Имя пациента:</label>
+        <input type="text" id="name" name="name" class="form-control" required>
+        <button type="submit" class="btn btn-primary mt-2">Добавить</button>
+    </form>
+{% endblock %}

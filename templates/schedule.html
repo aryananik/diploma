@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Расписание операций</h1>
+    <ul>
+        {% for patient in patients %}
+            {% for operation in patient.operations %}
+                <li>{{ patient.name }}: {{ operation }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endblock %}
